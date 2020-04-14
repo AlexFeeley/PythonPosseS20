@@ -1,17 +1,28 @@
 # empty dictionary
 dict = {}
+file = "us-counties.csv"
+f = open(file, "rt")
 
 # skip first line
 header = f.readline()
 
 for line in f:
     temp = line.split(",")
-    if temp[3] == state:
-        #date
-        x = temp[0]
-        #cases
-        y = int(temp[4])
+
+    #state
+    x = temp[2]
+    #date
+    y = temp[0]
+    #cases
+    z = int(temp[4])
+
     if x in dict:
-        dict[x] += y
+        if y in dict[x]:
+            dict[y] += z
+        else:
+            dict[x] = {y,z}
     else:
-        dict[x] = y
+        dict = { x: {y, z}}
+
+
+print(dict)
