@@ -6,23 +6,22 @@ f = open(file, "rt")
 # skip first line
 header = f.readline()
 
+state = input("State: ")
+
 for line in f:
-    temp = line.split(",")
+    if state in line:
+        temp = line.split(",")
 
-    #state
-    x = temp[2]
-    #date
-    y = temp[0]
-    #cases
-    z = int(temp[4])
+        # state
+        x = temp[2]
+        # date
+        y = temp[0]
+        # cases
+        z = int(temp[4])
 
-    if x in dict:
-        if y in dict[x]:
+        if y in dict:
             dict[y] += z
         else:
-            dict[x] = {y,z}
-    else:
-        dict = { x: {y, z}}
-
+            dict[y] = z
 
 print(dict)
