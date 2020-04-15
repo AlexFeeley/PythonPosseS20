@@ -7,6 +7,9 @@ def Get_Input():
 
     # Case of input doesn't matter, re-prompts user for input until valid state reached
     # Use Valid-State to help
+    while ~Valid_State(state):
+        print("Not a valid state! \nA valid state name will look like \"Tennessee\"\nPlease try again:")
+        state = input("State: ")
 
     return state
 
@@ -69,7 +72,18 @@ def Visualize_Data():
     plt.xlabel("Date", **axis_font)
     plt.show()
 
+def graph_dict(dict,state):
+    num_infected = list(dict.values())
+    total_infected = []
+    temp = 0
+    for i in range(0, len(num_infected)):
+        temp = temp + num_infected[i]
+        total_infected[i] = temp
 
+    plt.plot(total_infected)
+    plt.xlabel('Number of Days')
+    plt.ylabel('Total Infected Cases in '+state)
+    plt.show()
 
 def main():
     Visualize_Data()
