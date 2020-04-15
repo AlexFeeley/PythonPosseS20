@@ -1,3 +1,6 @@
+from matplotlib import rcParams
+rcParams['font.family']='sans-serif'
+rcParams['font.sans-serif']=['Verdana']
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -65,13 +68,14 @@ def Visualize_Data(data, state):
     # Create list of all dates from dictionary of data
     dates = data.keys()
     cases = data.values()
-    plt.bar(dates, cases) # Put data into bar graph
-    plt.xticks(fontsize=8, rotation=90) # Format X-Axis Label
-
+    plt.bar(dates, cases, align = "center", color = "green") # Put data into bar graph
+    plt.xticks(fontsize=7, rotation=90) # Format X-Axis Label
+    plt.yticks(fontsize=10)
     plt.xlabel("Date") # X-Axis Label
     plt.ylabel("Number of Cases") # Y-Axis Label
     plt.suptitle("Number of Covid-19 Cases in " + state.upper()) # Title
-    plt.title("Total Number of Covid-19 Cases: " + str(sum(data.values())), fontsize = 10) # Subtitle
+    plt.title("Total Number of Covid-19 Cases in " + state.upper() + ": " + str(sum(data.values())) , fontsize=12) # Subtitle
+
     plt.show()
 
 
