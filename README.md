@@ -14,7 +14,7 @@ with the onslaught of the *Coronavirus*.
 
 As this project was completed in the midst of a pandemic, it's only fitting that our simple
 project on Python data visualization shows the increase in the number of COVID-19 cases per
-day in each U.S. state. 
+day in each U.S. state.
 
 **To use the repo:** Clone the repo, run the main file, and type in which state's progression
 of cases you would like to see. A bar graph will appear, showing the number of cases. 
