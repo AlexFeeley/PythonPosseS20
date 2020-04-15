@@ -1,31 +1,30 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-
+# String function that returns the state for the data that is to be visualized
 def Get_Input():
     # Prompt user to enter a state
-    state = input("State: ")
+    state = input("State: ").lower()
 
     # Case of input doesn't matter, re-prompts user for input until valid state reached
-    # Use Valid-State to help
-    while ~Valid_State(state):
-        print("Not a valid state! \nA valid state name will look like \"Tennessee\"\nPlease try again:")
+    while not Valid_State(state):
+        print("Not a valid state! Please try again:")
         state = input("State: ")
 
     return state
 
 
-# Boolean function that returns true if state is in U.S., false if not
+# Boolean helper function that returns true if state is in U.S., false if not
 def Valid_State(myInput):
     # List of every state in the US
-    states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado",
-              "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois",
-              "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland",
-              "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana",
-              "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York",
-              "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania",
-              "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah",
-              "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
+    states = ["alabama", "alaska", "arizona", "arkansas", "california", "colorado",
+              "connecticut", "delaware", "florida", "georgia", "hawaii", "idaho", "illinois",
+              "indiana", "iowa", "kansas", "kentucky", "louisiana", "maine", "maryland",
+              "massachusetts", "michigan", "minnesota", "mississippi", "missouri", "montana",
+              "nebraska", "nevada", "new hampshire", "new jersey", "new mexico", "new york",
+              "north carolina", "north dakota", "ohio", "oklahoma", "oregon", "pennsylvania",
+              "rhode island", "south carolina", "south dakota", "tennessee", "texas", "utah",
+              "vermont", "virginia", "washington", "west virginia", "wisconsin", "wyoming"]
 
     if myInput in states:
         return True
@@ -33,7 +32,8 @@ def Valid_State(myInput):
         return False
 
 
-def Parse_Data():
+# Function to parse csv data and put one state's cases and dates into a dictionary
+def Parse_Data(state):
     # empty dictionary
     data = {}
 
@@ -43,10 +43,8 @@ def Parse_Data():
     # skip first line
     f.readline()
 
-    state = Get_Input()
-
     for line in f:
-        if state in line:
+        if state in line.lower():
             temp = line.split(",")
 
             # date
@@ -62,36 +60,25 @@ def Parse_Data():
     return data
 
 
-def Visualize_Data():
+# Graphs data
+def Visualize_Data(data, state):
     # Create list of all dates from dictionary of data
-    data = Parse_Data()
     dates = data.keys()
     cases = data.values()
+    plt.bar(dates, cases) # Put data into bar graph
+    plt.xticks(fontsize=8, rotation=90) # Format X-Axis Label
 
-    axis_font = {'fontname': 'Arial', 'size': '14'}
-
-    plt.bar(dates, cases)
-    plt.xticks(fontsize=8, rotation=90)
-    plt.xlabel("Date", **axis_font)
-    plt.show()
-
-
-def Plot_Total_Cases(data, state):
-    num_infected = list(data.values())
-    total_infected = []
-    temp = 0
-    for i in range(0, len(num_infected)):
-        temp = temp + num_infected[i]
-        total_infected[i] = temp
-
-    plt.plot(total_infected)
-    plt.xlabel('Number of Days')
-    plt.ylabel('Total Infected Cases in ' + state)
+    plt.xlabel("Date") # X-Axis Label
+    plt.ylabel("Number of Cases") # Y-Axis Label
+    plt.suptitle("Number of Covid-19 Cases in " + state.upper()) # Title
+    plt.title("Total Number of Covid-19 Cases: " + str(sum(data.values())), fontsize = 10) # Subtitle
     plt.show()
 
 
 def main():
-    Visualize_Data()
+    state = Get_Input() # Get state for covid-19 data to be visualized
+    data = Parse_Data(state) # Put that state's data into a dictionary
+    Visualize_Data(data, state) # Visualize that data
 
 
 main()
