@@ -13,7 +13,7 @@ skill for the entire group as it allowed the project to easily transition to a v
 with the onslaught of the *Coronavirus*. 
 
 As this project was completed in the midst of a pandemic, it's only fitting that our simple
-project on Python data visualization shows the increase in the number of covid-19 cases per
+project on Python data visualization shows the increase in the number of COVID-19 cases per
 day in each U.S. state. 
 
 **To use the repo:** Clone the repo, run the main file, and type in which state's progression
