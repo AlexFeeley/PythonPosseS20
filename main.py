@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 def Get_Input():
     # Prompt user to enter a state
     state = input("State: ")
@@ -13,17 +14,18 @@ def Get_Input():
 
     return state
 
+
 # Boolean function that returns true if state is in U.S., false if not
 def Valid_State(myInput):
     # List of every state in the US
     states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado",
-     "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois",
-     "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland",
-     "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana",
-     "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York",
-     "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania",
-     "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah",
-     "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
+              "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois",
+              "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland",
+              "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana",
+              "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York",
+              "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania",
+              "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah",
+              "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
 
     if myInput in states:
         return True
@@ -59,6 +61,7 @@ def Parse_Data():
                 data[y] = z
     return data
 
+
 def Visualize_Data():
     # Create list of all dates from dictionary of data
     data = Parse_Data()
@@ -68,12 +71,13 @@ def Visualize_Data():
     axis_font = {'fontname': 'Arial', 'size': '14'}
 
     plt.bar(dates, cases)
-    plt.xticks(fontsize = 8, rotation = 90)
+    plt.xticks(fontsize=8, rotation=90)
     plt.xlabel("Date", **axis_font)
     plt.show()
 
-def graph_dict(dict,state):
-    num_infected = list(dict.values())
+
+def Plot_Total_Cases(data, state):
+    num_infected = list(data.values())
     total_infected = []
     temp = 0
     for i in range(0, len(num_infected)):
@@ -82,10 +86,12 @@ def graph_dict(dict,state):
 
     plt.plot(total_infected)
     plt.xlabel('Number of Days')
-    plt.ylabel('Total Infected Cases in '+state)
+    plt.ylabel('Total Infected Cases in ' + state)
     plt.show()
+
 
 def main():
     Visualize_Data()
+
 
 main()
